@@ -34,34 +34,34 @@
   
 
 <div class="">
-  <form action="/insert_item" method="POST" >
+  <form action="" method="POST" >
 
   <div class="input-field col s10">
-      <input id="item_title" name="item_title" type="text" minlength="1" maxlength="30" placeholder="Title of publication" class="form-control validate" required>
-          <label for="item_title">
+      <input id="title" name="title" type="text" minlength="1" maxlength="30" placeholder="Title of publication" class="form-control validate" required>
+          <label for="title">
           Title
               <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="1-30 characters" aria-hidden="true"></i>
           </label>
   </div>
 
   <div class="input-field col s10">
-      <input id="item_author" name="item_author" type="text" minlength="1" maxlength="30" placeholder="Author of publication" class="form-control validate" required>
-          <label for="item_author">
+      <input id="author" name="author" type="text" minlength="1" maxlength="30" placeholder="Author of publication" class="form-control validate" required>
+          <label for="author">
           Author
               <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="1-30 characters" aria-hidden="true"></i>
           </label>
   </div>
 
   <div class="input-field col s10">
-    <input id="item_isbn" name="item_isbn" type="text" minlength="1" maxlength="30" placeholder="ISBN of publication" class="form-control validate" required>
-        <label for="item_isbn">
+    <input id="isbn" name="isbn" type="text" minlength="1" maxlength="30" placeholder="ISBN of publication" class="form-control validate" required>
+        <label for="isbn">
         ISBN
             <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="1-30 characters" aria-hidden="true"></i>
         </label>
 </div>
 
   <div class="input-field col s10">
-          <select id="item_type" name="item_type" class="form-control validate" required>
+          <select id="type1" name="type1" class="form-control validate" required>
               <option value="" disabled selected>Type of item</option>
               
               <option value="Book">Book</option>
@@ -77,11 +77,11 @@
               <option value="Blog">Blog</option>
               
           </select>
-          <label for="item_type">Item type</label>
+          <label for="type">Item type</label>
   </div>
 
   <div class="input-field col s10">
-          <select id="item_read_time" name="item_read_time" class="form-control validate" required>
+          <select id="read_time" name="read_time" class="form-control validate" required>
               <option value="" disabled selected>Reading time</option>
               
               <option value="1 Hour">1 Hour</option>
@@ -99,7 +99,7 @@
   </div>
 
   <div class="input-field col s10">
-          <select id="item_category" name="item_category" class="form-control validate" required>
+          <select id="category" name="category" class="form-control validate" required>
               <option value="" disabled selected>Genre</option>
               
               <option value="Drama">Drama</option>
@@ -119,11 +119,11 @@
               <option value="Collections">Collections</option>
               
           </select>
-          <label for="item_category">Item Category</label>
+          <label for="category">Item Category</label>
   </div>
 
   <div class="input-field col s10">
-          <select id="item_rating" name="item_rating" class="form-control validate" required>
+          <select id="rating" name="rating" class="form-control validate" required>
               <option value="" disabled selected>Rating</option>
               
               <option value="1 Star">1 Star</option>
@@ -137,28 +137,28 @@
               <option value="5 Stars">5 Stars</option>
               
           </select>
-          <label for="item_rating">Item Rating</label>
+          <label for="rating">Item Rating</label>
   </div>
 
   <div class="input-field col s10">
-      <input id="item_comment" name="item_comment" type="text" minlength="1" maxlength="500" placeholder="Add your comments" class="form-control " required>
-          <label for="item_comment">
+      <input id="comment" name="comment" type="text" minlength="1" maxlength="500" placeholder="Add your comments" class="form-control " required>
+          <label for="comment">
           Comments
               <i class="far fa-question-circle tooltipped" data-position="right" data-tooltip="1-500 characters" aria-hidden="true"></i>
           </label>
   </div>
 
   <div class="input-field col s10">
-      <input id="item_url" name="item_url" type="text"  placeholder="Add a link to the image" class="form-control " required>
-          <label for="item_url">
+      <input id="url" name="url" type="text"  placeholder="Add a link to the image" class="form-control " required>
+          <label for="url">
           Link to image
               <i class="far fa-question-circle tooltipped" data-position="right" aria-hidden="true"></i>
           </label>
   </div>
 
   <div class="input-field col s10">
-      <input id="item_purchase" name="purchase" type="text"  placeholder="Add a link to purchase the listing" class="form-control " required>
-          <label for="item_purchase">
+      <input id="purchase" name="purchase" type="text"  placeholder="Add a link to purchase the listing" class="form-control " required>
+          <label for="purchase">
           Link to Purchase Listing
               <i class="far fa-question-circle tooltipped" data-position="right" aria-hidden="true"></i>
           </label>

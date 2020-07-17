@@ -58,7 +58,16 @@ class ReusableForm(Form):
     surname = TextField('Surname:', validators=[validators.required()])
     email = TextField('Email:', validators=[validators.required(), validators.Length(min=6, max=35)])
     password = TextField('Password:', validators=[validators.required(), validators.Length(min=3, max=35)])
-
+    title = TextField('tile:', validators=[validators.required()])
+    author = TextField('author:', validators=[validators.required()])
+    isbn = TextField('isbn:', validators=[validators.required()])
+    read_time = TextField('read_time:', validators=[validators.required()])
+    category = TextField('category:', validators=[validators.required()])
+    rating = TextField('rating:', validators=[validators.required()])
+    comment = TextField('comment:', validators=[validators.required()])
+    url = TextField('url:', validators=[validators.required()])
+    purchase = TextField('purchase:', validators=[validators.required()])
+    
     @app.route("/listings", methods=['GET', 'POST'])
     def listings():
 	
@@ -194,9 +203,28 @@ def additem():
     return render_template('book_club2.html')
 
 
-@app.route('/add_item')
+@app.route('/add_item', methods=['GET','POST'])
 def additem1():
-    return render_template('book_club3.html')
+    form = ReusableForm(request.form)
+    if request.method == 'POST':
+        books = conn[DBS_NAME].books
+        title=request.form['title']
+        author=request.form['author']
+        isbn=request.form['isbn']
+        url=request.form['url']
+        purchase=request.form['purchase']
+        read_time=request.form['read_time']
+        comment=request.form['comment']
+        purchase=request.form['purchase']
+        category=request.form['category']
+        rating=request.form['rating']
+        books.insert({'title' : title, 'author' : author, 'isbn' : isbn, 'url' : url, 'read_time' : read_time, 'rating' : rating, 'purchase' : purchase, 'comment' : comment, 'category' : category})
+        return render_template('book_club3.html')
+    else:
+        return render_template('book_club3.html')
+
+                       
+
 
 @app.route('/list')
 def lista():

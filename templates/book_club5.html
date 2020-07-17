@@ -119,6 +119,72 @@
           </div>
         </div>
         
+
+
+        {% for todo in todos %}
+		<tr class="datas">
+			<td><a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit ME"></a></td>
+			<td class="name"> </td>
+			<td class="desc">{{ todo["desc"] }}</td>
+			<td class="date">{{ todo["date"] }}</td>
+			<td class="pr">{{ todo["pr"] }}</td>
+			<td class="func1"><a href="./remove?_id={{ todo['_id'] }}"><button type="submit">DELETE</button></a></td>
+			<td class="func1"><a href="./update?_id={{ todo['_id'] }}"><button type="submit">EDIT</button></a></td>
+        </tr>
+        
+
+
+        <div class="col s10 m6 l4">
+            <div class="card z-depth-2">
+       
+            <div class="card-image waves-effect waves-block waves-light img-fit">
+           <img src="https://m.media-amazon.com/images/I/91XhjwM1OZL._AC_UY327_QL65_.jpg" class="activator image-size">
+              
+              </div>
+            
+            
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 bottom">The Expanse - Caliban's War<i class="material-icons right">expand_less</i></span>
+                
+                <hr>
+                <div class="card-space">
+                    <p class="">Author: James S. A. Corey</p>
+                    <p>User Added: Darren        </p>
+                    <p>Read Time: 15+ Hours</p>
+                    <p>Added on: 06 June 2020</p>
+                    <p>Rating: 5 Stars</p>
+    
+                    <hr class="top sml-bottom">
+                     <div class="">
+                    <a class="btn waves-effect waves-light standard-btn icon-right btn-spc btn-goto btn-small" href="/listings/5edc0ed120beca0b6461e639">Listings <i class="fa fa-book"></i></a>
+    
+                    <a class="btn waves-effect waves-light standard-btn icon-right btn-spc btn-pur btn-small" href="https://www.amazon.co.uk/Calibans-War-Expanse-major-Netflix/dp/1841499919/ref=pd_sbs_14_3/261-0297827-8504661?_encoding=UTF8&amp;pd_rd_i=1841499919&amp;pd_rd_r=3a869de0-6e78-4c67-8002-0aca5ae79dec&amp;pd_rd_w=4Dma3&amp;pd_rd_wg=o1Ccm&amp;pf_rd_p=2773aa8e-42c5-4dbe-bda8-5cdf226aa078&amp;pf_rd_r=JP3AF4DGXM8Q399HE536&amp;psc=1&amp;refRID=JP3AF4DGXM8Q399HE536">Purchase <i class="fa fa-cart-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="card-reveal card-back">
+                <span class="card-title grey-text text-darken-4 crd-title"><i class="material-icons right">expand_more</i>The Expanse - Caliban's War</span>
+                <p class="top-crd">The second book in the NYT bestselling Expanse series, Caliban's War shows a solar system on the brink of war, and the only hope of peace rests on James Holden and the crew of the Rocinante's shoulders. Now a Prime Original series.</p>
+    
+               <hr class="top sml-bottom">
+                   <div class="">
+                    <a class="btn waves-effect waves-light standard-btn icon-right btn-spc btn-goto btn-small" href="/listings/5edc0ed120beca0b6461e639">Listings <i class="fa fa-book"></i></a>
+                    <a class="btn waves-effect waves-light standard-btn icon-right btn-spc btn-pur btn-small" href=" https://www.amazon.co.uk/Calibans-War-Expanse-major-Netflix/dp/1841499919/ref=pd_sbs_14_3/261-0297827-8504661?_encoding=UTF8&amp;pd_rd_i=1841499919&amp;pd_rd_r=3a869de0-6e78-4c67-8002-0aca5ae79dec&amp;pd_rd_w=4Dma3&amp;pd_rd_wg=o1Ccm&amp;pf_rd_p=2773aa8e-42c5-4dbe-bda8-5cdf226aa078&amp;pf_rd_r=JP3AF4DGXM8Q399HE536&amp;psc=1&amp;refRID=JP3AF4DGXM8Q399HE536">Purchase <i class="fa fa-cart-plus"></i></a>
+                    </div>
+                
+                
+            </div>
+          </div>
+        </div>
+
+
+	{% endfor %}
+	
+	
+
+
+
         <div class="col s10 m6 l4">
             <div class="card z-depth-2">
        
