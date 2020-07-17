@@ -11,7 +11,7 @@ import bcrypt
 
 MONGO_URI = os.getenv("MONGO_URI")
 DBS_NAME = "books"
-COLLECTION_NAME = "bookdetails"
+COLLECTION_NAME = "books"
 
 """
  This is to make a CSV file.
@@ -65,6 +65,10 @@ class ReusableForm(Form):
         
     
         return render_template('listings.html')
+    @app.route("/post/<int:bookID>")
+    def post(bookID):
+        post = conn[DBS_NAME][COLLECTION_NAME].query.get_or_404(bookID)
+        return render_template('post.html', title=post.title, post=post)
 	
     @app.route("/register", methods=['GET', 'POST'])
     def register():
@@ -93,7 +97,7 @@ class ReusableForm(Form):
         else:
             flash('Error: All the form fields are required. ')
     
-        return render_template('register.html', form=form)
+        return render_template('register1.html', form=form)
 	
 	
     @app.route('/login', methods=['GET', 'POST'])
@@ -112,18 +116,95 @@ class ReusableForm(Form):
             if login_user:
                 if (password) == login_user['password']:
                     session['username'] = request.form['username']
-                    return redirect(url_for('browse'))
-                    return 'Invalid username/password combination'
+                    session.permanent = True
+                    user = request.form["username"]
+                    session["user"] = user
+                    return redirect(url_for('index'))
+                    #return 'Invalid username/password combination'
 
         #return 'Invalid username/password combination'
 
         return render_template("login.html", form=form)
+    
+@app.route('/login1', methods = ['GET', 'POST'])
+def login1():
+    error = None
+   
+    if request.method == 'POST':
+      if request.form['username'] != 'admin' or \
+         request.form['password'] != 'admin':
+         error = 'Invalid username or password. Please try again!'
+      else:
+         flash('You were successfully logged in')
+         session['username'] = request.form['username']
+         session.permanent = True
+         user = request.form["username"]
+         session["user"] = user
+         return redirect(url_for('index'))
+         
+         #url = 'https://5000-a3185470-da53-4b4e-aaef-10153e2c0ffd.ws-eu01.gitpod.io/'
+         #return request.base_url
+         #return redirect(url, code=307)
+			
+    return render_template('login1.html', error = error)
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   todos_l = todos.find()
+   session.pop('username', None)
+   return redirect(url_for('index'))
 		
+@app.route('/browseone', methods=['GET'])
+def browseone():
+    number = conn[DBS_NAME][COLLECTION_NAME]
 
+    #offset = int(request.args['offset'])
+    #limit = int(request.args['limit'])
+    query = {}
+    #query["authors"] = {u"$exists": True}
+    query["authors"] = {u"$exists": True}
+    query["average_rating"] = {u"$exists": True}
+    query["isbn"] = {u"$exists": True}
+
+    numbers = coll.find(query).sort('bookID', pymongo.DESCENDING)
+    #numbers = coll.find({'bookID' : {'$lte' : last_id}}).sort('bookID', pymongo.DESCENDING).limit(limit)
+    output =[]
+
+   
+
+    
+    for i in numbers:
+        #output.append({'title' : i['_id'] })
+        output.append({'title': i['title'], 'author': i['authors'], 'bookID': i['bookID'], 'average_rating': i['average_rating'], 'isbn': i['isbn'], 'language_code': i['language_code'], 'publication_date': i['publication_date'], 'publisher': i['publisher']})
+    
+        #next_url = '/browseone?=limit' + str(limit) + '&offset=' + str(offset + limit)
+       # prev_url = '/browseone?=limit' + str(limit) + '&offset=' + str(offset - limit)
+    
+    #return jsonify({'result' : output, 'prev_url' : 'prev_url', 'next_url' : 'next_url'})
+    #return jsonify(output)
+    your_json = '["foo", {"bar":["baz", null, 1.0, 2]}]'
+    return render_template("listings.html", numbers=numbers)
 		
 @app.route('/book_club')
 def book_club():
 	return render_template('book_club.html')
+
+@app.route('/additem')
+def additem():
+    return render_template('book_club2.html')
+
+
+@app.route('/add_item')
+def additem1():
+    return render_template('book_club3.html')
+
+@app.route('/list')
+def lista():
+    return render_template('book_club4.html')
+
+@app.route('/browse')
+def browse():
+    return render_template('book_club5.html')
     
     
 
@@ -133,6 +214,15 @@ def redirect_url():
     return request.args.get('next') or \
            request.referrer or \
            url_for('index')
+#check for issuses
+@app.route("/index")
+def index1():
+    title = 'index'
+    heading = 'index'
+    todos_l = todos.find({"done":"no"})
+    a2="active"
+    return render_template('base1.html',a2=a2,todos=todos_l,t=title,h=heading)
+
 
 @app.route("/list")
 def lists ():
@@ -144,12 +234,17 @@ def lists ():
 	return render_template('base1.html',a1=a1,todos=todos_l,t=title,h=heading)
 
 @app.route("/")
+def index ():
+    todos_l = todos.find()
+    return render_template('base1.html',todos=todos_l)
+
 @app.route("/uncompleted")
 def tasks ():
-	#Display the Uncompleted Tasks
-	todos_l = todos.find({"done":"no"})
-	a2="active"
-	return render_template('index.html',a2=a2,todos=todos_l,t=title,h=heading)
+    title = 'index'
+    heading = 'index'
+    todos_l = todos.find({"done":"no"})
+    a2="active"
+    return render_template('index.html',a2=a2,todos=todos_l,t=title,h=heading)
 
 
 @app.route("/completed")
@@ -244,5 +339,4 @@ def special_exception_handler(error):
     
 
 if __name__ == "__main__":
-
     app.run()
